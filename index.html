@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Booking widget demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='css/booking-widget.css' />
+</head>
+
+<body>
+    <div>
+        <p>
+            Already picked:
+        </p>
+        <ul id="multiple-selected">
+        </ul>
+        <p>Pick another date: <input id="datepicker-multiple" type="text"></p>
+    </div>
+    <!-- <p>You can easily implement multi date pickers by using the API methods for selecting and removing a date, respectively.</p> -->
+    <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script>
+        // Datepicker stub to use the regional configs from jQuery UI datepicker
+        $.datepicker = {
+            regional: [],
+            setDefaults: function() {}
+        };
+    </script>
+    <script src="js/daterangepicker.js"></script>
+    <script>
+        $(function() {
+            // $('#datepicker-default').datepicker();
+            // $('#datepicker-german').datepicker({
+            //     monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            //     dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            //     firstDay: 1
+            // });
+            // $('#datepicker-french').datepicker({
+            //     monthNames: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+            //     dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            //     firstDay: 1
+            // });
+            // $('#datepicker-spanish').datepicker({
+            //     monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            //     dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            //     firstDay: 1
+            // });
+            // $('#datepicker-yymmdd').datepicker({
+            //     convertISOToDisplayDate: function(isoDate) {
+            //         return isoDate.substr(5, 2) + '/' + isoDate.substr(8, 2) + '/' + isoDate.substr(2, 2);
+            //     },
+            //     convertDisplayDateToISO: function(displayDate) {
+            //         var matches = displayDate.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/);
+
+            //         if (!!matches) {
+            //             return ('20' + matches[3]).substr(-4) + '-' + ('0' + matches[1]).substr(-2) + '-' + ('0' + matches[2]).substr(-2);
+            //         }
+            //         return '';
+            //     }
+            // });
+            $('#datepicker-multiple').datepicker({
+                dateFormat: 'ddmm',
+                minDate: new Date(),
+                onSelect: function(date) {
+                    $(this).datepicker('addDates', date);
+
+                    //	var date1 = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                    $('.selected-date').append('<li data-date="' + date + '">' + date + '</li>');
+                }
+            });
+            $(document).on('click', '#multiple-selected li', function() {
+                $(this).remove();
+                $('#datepicker-multiple').datepicker('removeDates', $(this).data('date'));
+            });
+        });
+    </script>
+</body>
+
+</html>
