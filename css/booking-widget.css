@@ -208,4 +208,20 @@ input {
         text-align: center;
         padding: 11px;
     }
+    .dateSelected {
+        width: 66px;
+        height: 60px;
+        font-family: YuGothicUI;
+        font-size: 54px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #000000;
+    }
+    .selectedDateWrapper {
+        width: 50%;
+        float: left;
+    }
 }
